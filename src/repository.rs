@@ -22,8 +22,8 @@ impl Repository for StandardRepository {
 
     fn find_all() -> Result<Restaurants, RequestError> {
         match RESTAURANTS.read() {
-            Ok(lock) => match lock.into() {
-                Some(_) => todo!(),
+            Ok(lock) => match &*lock {
+                Some(restaurants) => Ok(restaurants.clone()),
                 None => Err(RequestError { msg: "Repository is not initialized", status: StatusCode::SERVICE_UNAVAILABLE }),
             },
             Err(_) => Err(RequestError { msg: "Could not lock repository", status: StatusCode::SERVICE_UNAVAILABLE })
