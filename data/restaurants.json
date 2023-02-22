@@ -1,0 +1,57 @@
+[
+    {
+        "name": "Potj",
+        "max_people": 10,
+        "total_travel_time_minutes": 20
+    },
+    {
+        "name": "Spark",
+        "max_people": 10,
+        "total_travel_time_minutes": 10
+    },
+    {
+        "name": "3 Brasseurs",
+        "max_people": 10,
+        "total_travel_time_minutes": 15
+    },
+    {
+        "name": "Steak N Coffee",
+        "max_people": 10,
+        "total_travel_time_minutes": 15
+    },
+    {
+        "name": "La Cave d'Hippolyte",
+        "max_people": 10,
+        "total_travel_time_minutes": 20
+    },
+    {
+        "name": "L'alumette",
+        "max_people": 10,
+        "total_travel_time_minutes": 25
+    },
+    {
+        "name": "Burger King",
+        "max_people": 10,
+        "total_travel_time_minutes": 15
+    },
+    {
+        "name": "KFC",
+        "max_people": 10,
+        "total_travel_time_minutes": 15
+    },
+    {
+        "name": "Buffalo Grill",
+        "max_people": 10,
+        "total_travel_time_minutes": 15
+    },
+    {
+        "name": "Old Wild West",
+        "max_people": 10,
+        "total_travel_time_minutes": 15
+    },
+    {
+        "name": "Ristorante Del Arte",
+        "max_people": 10,
+        "total_travel_time_minutes": 15
+    }
+]
