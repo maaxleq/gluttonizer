@@ -1,10 +1,8 @@
-use std::sync::RwLock;
+use std::sync::{RwLock, Arc};
 
-use axum::http::StatusCode;
+use lazy_static::lazy_static;
 
-use crate::{entity::{Restaurants, GluttonRequest, GluttonResponse}, error::RequestError, picker::{Pick, StandardPicker}};
-
-static RESTAURANTS: RwLock<Option<Restaurants>> = RwLock::new(None);
+use crate::{entity::{Restaurants, GluttonRequest, GluttonResponse}, error::{RequestError, ProgramError}, picker::{Pick, StandardPicker}, data_provider::{JsonProvider, DataProvide}};
 
 pub trait Repository {
     type Picker: Pick;
@@ -15,7 +13,20 @@ pub trait Repository {
     }
 }
 
+lazy_static! {
+    static ref RESTAURANTS: Arc<RwLock<Option<Restaurants>>> = Arc::new(RwLock::new(None));
+}
+
 pub struct StandardRepository {}
+
+impl StandardRepository {
+    pub fn init() -> Result<(), ProgramError> {
+        let provider = JsonProvider::new(String::from("data/restaurants.json"));
+        *RESTAURANTS.write()? = Some(provider.get_data()?);
+
+        Ok(())
+    }
+}
 
 impl Repository for StandardRepository {
     type Picker = StandardPicker;
@@ -24,9 +35,9 @@ impl Repository for StandardRepository {
         match RESTAURANTS.read() {
             Ok(lock) => match &*lock {
                 Some(restaurants) => Ok(restaurants.clone()),
-                None => Err(RequestError { msg: "Repository is not initialized", status: StatusCode::SERVICE_UNAVAILABLE }),
+                None => Err(RequestError::service_unavailable().with_msg("Repository is not initialized"))
             },
-            Err(_) => Err(RequestError { msg: "Could not lock repository", status: StatusCode::SERVICE_UNAVAILABLE })
+            Err(_) => Err(RequestError::service_unavailable().with_msg("Could not lock repository"))
         }
     }
 }

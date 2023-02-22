@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <form id="gluttonizer-form" method="post" action="/results">
+        <input type="number" id="people-count" name="people_count" step="1" min="0" value="0">
+        <label for="people-count">people will eat</label>
+    
+        <label for="available-time-minutes">The break will last</label>
+        <input type="number" id="available-time-minutes" name="available_time_minutes" step="1" min="0" value="0">
+        <label for="available-time-minutes">minutes</label>
+    
+        <label for="minimal-eat-time-minutes">We want at least</label>
+        <input type="number" id="minimal-eat-time-minutes" name="minimal_eat_time_minutes" step="1" min="0" value="0">
+        <label for="minimal-eat-time-minutes">minutes to eat</label>
+    
+        <label for="exclude">We don't want</label>
+        <fieldset id="exclude">
+            {% for restaurant in restaurants %}
+                <input type="checkbox" name="exclude[]" value="{{ restaurant.name }}" id="{{ restaurant.name }}"/>
+                <label for="{{ restaurant.name }}">{{ restaurant.name }}</label>
+            {% endfor %}
+        </fieldset>
+
+        <button type="submit">Gluttonize</button>
+    </form>
+{% endblock %} 

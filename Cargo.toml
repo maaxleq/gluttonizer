@@ -9,3 +9,8 @@ edition = "2021"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 axum = "0.6.7"
+lazy_static = "1.4.0"
+dotenv = "0.15.0"
+askama = { version = "0.11.1", features = ["with-axum"] }
+tokio = { version = "1.23.0", features = ["full"] }
+askama_axum = "0.2.1"
