@@ -18,6 +18,6 @@ impl From<std::io::Error> for ProgramError {
 }
 
 pub struct RequestError {
-    pub msg: String,
+    pub msg: &'static str,
     pub status: StatusCode
 }
