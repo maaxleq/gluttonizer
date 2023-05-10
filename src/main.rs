@@ -1,5 +1,11 @@
-use axum::{Router, routing::get, BoxError};
-use gluttonizer::{controller::home, repository::StandardRepository};
+use axum::{
+    routing::{get, post},
+    BoxError, Router,
+};
+use gluttonizer::{
+    controller::{gluttonize, home, restaurants},
+    repository::StandardRepository,
+};
 
 static DEFAULT_HTTP_HOST: &str = "127.0.0.1";
 static DEFAULT_HTTP_PORT: &str = "8000";
@@ -8,7 +14,10 @@ static DEFAULT_HTTP_PORT: &str = "8000";
 async fn main() -> Result<(), BoxError> {
     StandardRepository::init()?;
 
-    let app = Router::new().route("/", get(home));
+    let app = Router::new()
+        .route("/", get(home))
+        .route("/results", post(gluttonize))
+        .route("/restaurants", get(restaurants));
 
     let host = dotenv::var("HTTP_HOST").unwrap_or(DEFAULT_HTTP_HOST.to_string());
     let port = dotenv::var("HTTP_PORT").unwrap_or(DEFAULT_HTTP_PORT.to_string());

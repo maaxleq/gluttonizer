@@ -1,18 +1,23 @@
+use rand::{seq::SliceRandom, thread_rng};
+
 use crate::entity::{GluttonRequest, GluttonResponse, GluttonSuggestion, Restaurant};
 
 pub trait Pick {
     fn complies(restaurant: Restaurant, request: GluttonRequest) -> bool;
     fn pick(restaurants: Vec<Restaurant>, request: GluttonRequest) -> GluttonResponse {
-        restaurants
-            .iter()
-            .filter(|restaurant| Self::complies(restaurant.clone().to_owned(), request.clone()))
-            .map(|restaurant| GluttonSuggestion {
-                restaurant_name: restaurant.name.clone(),
-                time_to_eat_minutes: request
-                    .available_time_minutes
-                    .saturating_sub(restaurant.total_travel_time_minutes),
-            })
-            .collect()
+        let mut response =  restaurants
+        .iter()
+        .filter(|restaurant| Self::complies(restaurant.clone().to_owned(), request.clone()))
+        .map(|restaurant| GluttonSuggestion {
+            restaurant_name: restaurant.name.clone(),
+            time_to_eat_minutes: request
+                .available_time_minutes
+                .saturating_sub(restaurant.total_travel_time_minutes),
+        }).collect::<GluttonResponse>();
+       
+        response.shuffle(&mut thread_rng());
+
+        response
     }
 }
 

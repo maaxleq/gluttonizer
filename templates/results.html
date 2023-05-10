@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col items-start">
+        {% if results.len() == 0 %}
+            <p class="hover:translate-x-4 transition-transform text-base sm:text-xl">No restaurant found, guess you won't eat today :(</p>
+        {% else %}
+            {% for result in results %}
+                <p class="pb-3 {% if loop.first %}text-lg sm:text-3xl{% endif %} hover:translate-x-4 transition-transform">Go to <span class="font-bold">{{ result.restaurant_name }}</span>, you will have <span class="font-bold">{{ result.time_to_eat_minutes }}</span> minutes to eat</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %} 
