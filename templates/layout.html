@@ -1,21 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en" class="w-full">    
   	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Gluttonizer - {% block title %}{% endblock %}</title>
-		<link rel="stylesheet" href="./style.css">
-		<link rel="icon" href="./favicon.ico" type="image/x-icon">
-        <style>
-            
-        </style>
+		<link rel="icon" href="https://boisterous-figolla-fc34d1.netlify.app/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<style>
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+
+			input[type=number] {
+				appearance: textfield;
+			}
+		</style>
+		<script src="https://cdn.tailwindcss.com"></script>
+        <script>
+			tailwind.config = {
+				theme: {
+					extend: {
+						spacing: {
+							'layout': "10%"
+						}
+					},
+				}
+			}
+		  </script>
   	</head>
-	<body>
-        <header>
-            
+	<body class="bg-amber-300 font-sans">
+        <header class="shadow-md bg-slate-800 w-full h-16 text-neutral-50 flex items-center justify-between px-layout border-b border-slate-300">
+			<h1 class="text-xl mr-16 flex items-center"><i class="fa-solid fa-utensils mr-4"></i><span class="hidden sm:block">GLUTTONIZER</span></h1>
+			<nav class="h-full flex items-center justify-start">
+				<a class="hover:underline ml-4" href="./">Home</a>
+				<a class="hover:underline ml-4" href="./restaurants">Restaurants</a>
+				<a class="text-3xl ml-4 hover:scale-90" href="https://github.com/maaxleq/gluttonizer"><i class="fa-brands fa-github"></i></a>
+			</nav>
         </header>
-		<main>
+		<main class="px-layout py-8 text-neutral-900 font-medium text-sm sm:text-lg flex justify-center">
 			{% block content %}{% endblock %} 
 		</main>
 	</body>

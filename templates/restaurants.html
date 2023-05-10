@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col items-start">
+        {% if restaurants.len() == 0 %}
+            <p class="hover:translate-x-4 transition-transform text-base sm:text-xl">No restaurant was added yet</p>
+        {% else %}
+            {% for restaurant in restaurants %}
+                <p class="pb-3 hover:translate-x-4 transition-transform"><span class="font-bold">{{ restaurant.name }}</span>, where you can go with <span class="font-bold">{{ restaurant.max_people }}</span> people</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %} 

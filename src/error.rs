@@ -45,6 +45,12 @@ impl IntoResponse for RequestError {
     }
 }
 
+impl Display for RequestError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.msg)
+    }
+}
+
 impl RequestError {
     pub fn with_msg(mut self, msg: &str) -> RequestError {
         self.msg = String::from(msg);
@@ -68,6 +74,13 @@ impl RequestError {
     pub fn not_found() -> RequestError {
         RequestError {
             status: StatusCode::NOT_FOUND,
+            msg: String::from("")
+        }
+    }
+
+    pub fn bad_request() -> RequestError {
+        RequestError {
+            status: StatusCode::BAD_REQUEST,
             msg: String::from("")
         }
     }
